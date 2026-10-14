@@ -6,8 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>보도 AI 감지 기획</title>
 <style>
-:root{--bg:#f6f7f9;--surface:#fff;--text:#1d2330;--muted:#5b6474;--line:#e2e6ec;--accent:#2f6fde;--accent-soft:#e8f0fd;--warn:#fff4e5;--ok:#e9f7ef;}
-@media (prefers-color-scheme:dark){:root{--bg:#12151b;--surface:#1b2029;--text:#e6e9ef;--muted:#9aa3b2;--line:#2c3340;--accent:#6ea0ff;--accent-soft:#1e2a40;--warn:#33281a;--ok:#1a3326;}}
+:root{color-scheme:light;--bg:#f7f9fc;--surface:#fff;--text:#1b2433;--muted:#5d6878;--line:#e3e8ef;--accent:#2563eb;--accent-soft:#eaf1ff;--warn:#fff6e8;--ok:#ecf8f1;--ink:#2a2f3a;--paper:#fffdf8;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;word-break:keep-all}
 #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
@@ -39,7 +38,7 @@ h4{margin:0 0 6px;font-size:16px}
 .card.warn{background:var(--warn)}.card.ok{background:var(--ok)}
 .callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:14px 16px;border-radius:8px;margin:16px 0}
 .note{color:var(--muted);font-size:14px}
-table{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0;display:block;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0}
 th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
 th{background:var(--bg);white-space:nowrap}
 td small{color:var(--muted)}
@@ -54,9 +53,28 @@ td small{color:var(--muted)}
 .flow small{display:block;font-weight:400;color:var(--muted);font-size:12px}
 .flow span{color:var(--muted)}
 .formula{font-family:ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);padding:14px;border-radius:10px;font-size:14px}
-pre{background:#0f1420;color:#d8e1f0;padding:16px;border-radius:10px;overflow-x:auto;font-size:13.5px}
+pre{background:#f3f6fb;color:#1b2433;border:1px solid var(--line);padding:16px;border-radius:10px;overflow-x:auto;font-size:13.5px}
+.sb{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+.panel{position:relative;margin:0;border:1.5px solid var(--ink);border-radius:6px;background:var(--paper);overflow:hidden}
+.panel svg{display:block;width:100%;height:auto;border-bottom:1.5px dashed var(--line)}
+.panel figcaption{padding:12px 14px;font-size:14.5px}
+.panel figcaption b{display:block;font-size:15.5px;margin-bottom:2px}
+.sn{position:absolute;top:8px;left:10px;font:700 12px ui-monospace,Menlo,monospace;color:var(--ink);background:var(--paper);padding:1px 6px;border:1px solid var(--ink);border-radius:4px}
+.diagram{margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:12px}
+.diagram svg{display:block;width:100%;max-width:640px;height:auto;margin:0 auto}
+.diagram figcaption{color:var(--muted);font-size:14px;text-align:center;margin-top:6px}
+svg.ink{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+svg.ink .thin{stroke-width:1.3}
+svg.ink .accent{stroke:var(--accent)}
+svg.ink .fillacc{fill:var(--accent);stroke:var(--accent)}
+svg.ink .fillsoft{fill:var(--accent-soft)}
+svg.ink .t{fill:var(--ink);stroke:none;font-size:13px;font-family:inherit}
+svg.ink .t.s{font-size:11.5px}
+svg.ink .t.mid{text-anchor:middle}
+svg.ink .t.acc{fill:var(--accent);font-weight:700}
+svg.ink .t.w{fill:#fff;font-weight:700}
 footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px}
-@media (max-width:820px){.layout{grid-template-columns:1fr}nav.toc{display:none}.grid2,.grid3{grid-template-columns:1fr}main section{padding:20px}}
+@media (max-width:820px){.layout{grid-template-columns:1fr}nav.toc{display:none}.grid2,.grid3,.sb{grid-template-columns:1fr}table{display:block;overflow-x:auto}main section{padding:20px}}
 </style>
 </head>
 <body>
@@ -76,7 +94,7 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:24px 16px}
   </div></header>
   <div class="layout">
     <nav class="toc">
-      <a href="#overview">01 문제 정의</a><a href="#plan">02 기획</a><a href="#strategy">03 감지 전략</a><a href="#rain">· 비 온 뒤 감지</a><a href="#action">04 실천 방법</a><a href="#build">05 구현 방안</a><a href="#impact">06 파급효과</a><a href="#cost">07 비용 비교</a><a href="#risk">08 리스크</a><a href="#checklist">09 공모 준비</a>
+      <a href="#overview">01 문제 정의</a><a href="#storyboard">· 콘티 8컷</a><a href="#plan">02 기획</a><a href="#strategy">03 감지 전략</a><a href="#rain">· 비 온 뒤 감지</a><a href="#action">04 실천 방법</a><a href="#build">05 구현 방안</a><a href="#impact">06 파급효과</a><a href="#cost">07 비용 비교</a><a href="#risk">08 리스크</a><a href="#checklist">09 공모 준비</a>
     </nav>
     <main id="content"></main>
   </div>
